@@ -28,17 +28,19 @@ jobs:
       run: |
         export THEOS=$HOME/theos
         export ARCHS=arm64
-        make clean
+        # Kemi hequr 'make clean' që të mos ngecë procesi
         make package FINALPACKAGE=1
 
     - name: Upload .deb
       uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: SERFCN-deb
         path: packages/*.deb
 
     - name: Upload .dylib
       uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: SERFCN-dylib
         path: .theos/obj/arm64/*.dylib
